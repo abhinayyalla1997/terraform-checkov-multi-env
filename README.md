@@ -3,6 +3,8 @@
 This project demonstrates how to integrate **Checkov** into a real-world
 Terraform multi-environment setup using **GitHub Actions CI/CD**.
 
+<img width="1378" height="662" alt="CI:CD-Checkov-architecture-latest" src="https://github.com/user-attachments/assets/0270d596-3139-4236-bad0-649e4938de7b" />
+
 ## 🚀 What This Project Demonstrates
 
 - Multi-environment Terraform structure (**Dev & Prod**)
