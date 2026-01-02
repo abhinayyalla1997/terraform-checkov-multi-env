@@ -1,12 +1,40 @@
-# Terraform Infrastructure Security with Checkov
+# Terraform Multi-Environment Security with Checkov
 
-This repository demonstrates a multi-environment Terraform setup secured using Checkov.
+This project demonstrates how to integrate **Checkov** into a real-world
+Terraform multi-environment setup using **GitHub Actions CI/CD**.
 
-## Overview
-- Infrastructure as Code using Terraform
-- Reusable modules (VPC, EC2, S3, KMS, NAT)
-- Multiple environments (Dev, Prod)
-- Security validation using Checkov (CKV & CKV2)
-- Designed for CI/CD integration with GitHub Actions
+## 📌 What this project shows
 
-## Project Structure
+- Reusable Terraform modules (VPC, EC2, S3, KMS, NAT)
+- Multiple environments (Dev & Prod)
+- Static security scanning using Checkov
+- CKV (resource-level) and CKV2 (architecture-level) checks
+- CI/CD enforcement without deploying infrastructure
+
+## 🔍 Security Scanning
+
+Checkov is used to:
+- Detect misconfigurations before deployment
+- Highlight security gaps (public access, encryption, IAM)
+- Demonstrate baseline vs gating behavior in CI/CD
+
+Some failed checks are **intentional** to showcase:
+- Realistic security findings
+- Risk visibility
+- Shift-left security practices
+
+## 🚀 CI/CD Pipeline
+
+The GitHub Actions pipeline:
+- Runs Terraform init & validate
+- Executes Checkov scans
+- Produces security results on every PR
+
+No AWS credentials or Terraform apply are required.
+
+## 📂 Structure
+
+```text
+env/        → Environment-specific configs
+modules/    → Reusable Terraform modules
+.github/    → CI/CD workflows
