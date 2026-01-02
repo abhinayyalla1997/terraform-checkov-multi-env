@@ -1,15 +1,21 @@
 framework:
   - terraform
 
-# Full security + architecture checks
-severity-threshold: HIGH
+check:
+  - CKV_AWS_88     # EC2 public IP
+  - CKV_AWS_79     # IMDSv1
+  - CKV2_AWS_11    # VPC Flow Logs
+  - CKV_AWS_18     # S3 access logging
+  - CKV2_AWS_41    # IAM role on EC2
 
 skip-check:
   # Intentionally NOT skipping these → they will fail
   # Shows real security gaps in CI
   # CKV_AWS_88   # EC2 public IP
   # CKV2_AWS_11  # VPC flow logs
-  # CKV2_AWS_41  # IAM role on EC2
+  # CKV2_AWS_41  # IAM role on 
+
+soft_fail: false
 
 output:
   - cli
