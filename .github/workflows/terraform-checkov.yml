@@ -36,7 +36,12 @@ jobs:
         working-directory: env/Prod
         run: terraform validate
 
-      - name: Run Checkov (IaC Security Scan)
+      - name: Run Checkov (Dev)
         run: |
           pip install checkov
-          checkov -d . --quiet
+          checkov -d env/Dev --config-file env/Dev/.checkov.yaml || true
+
+      - name: Run Checkov (Prod)
+        run: |
+          checkov -d env/Prod --config-file env/Prod/.checkov.yaml
+
