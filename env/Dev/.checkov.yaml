@@ -1,5 +1,4 @@
-framework:
-  - terraform
+framework: terraform
 
 # Only run a small, safe subset
 check:
@@ -9,6 +8,3 @@ check:
   - CKV_AWS_227   # KMS key enabled
 
 soft_fail: true
-
-output:
-  - cli
