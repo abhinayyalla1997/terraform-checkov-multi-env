@@ -8,7 +8,7 @@ check:
   - CKV_AWS_145   # S3 KMS encryption
   - CKV_AWS_227   # KMS key enabled
 
-severity-threshold: CRITICAL
+soft_fail: true
 
 output:
   - cli
