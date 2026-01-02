@@ -1,0 +1,15 @@
+framework:
+  - terraform
+
+# Full security + architecture checks
+severity-threshold: HIGH
+
+skip-check:
+  # Intentionally NOT skipping these → they will fail
+  # Shows real security gaps in CI
+  # CKV_AWS_88   # EC2 public IP
+  # CKV2_AWS_11  # VPC flow logs
+  # CKV2_AWS_41  # IAM role on EC2
+
+output:
+  - cli
