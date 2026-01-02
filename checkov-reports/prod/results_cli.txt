@@ -1,0 +1,108 @@
+terraform scan results:
+
+Passed checks: 0, Failed checks: 5, Skipped checks: 0
+
+Check: CKV_AWS_88: "EC2 instance should not have public IP."
+	FAILED for resource: module.ec2.aws_instance.this
+	File: /../../modules/ec2/main.tf:29-44
+	Calling File: /main.tf:63-82
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/public-policies/public-12
+
+		29 | resource "aws_instance" "this" {
+		30 |   for_each = var.instances
+		31 | 
+		32 |   ami                    = data.aws_ami.selected.id
+		33 |   instance_type          = each.value.instance_type
+		34 |   subnet_id              = var.subnet_id
+		35 |   key_name               = var.key_name
+		36 |   associate_public_ip_address = true
+		37 |   vpc_security_group_ids = [each.value.sg_id]
+		38 | 
+		39 |   tags = {
+		40 |     Name        = "${var.environment}-${each.key}"
+		41 |     Environment = var.environment
+		42 |     Project     = var.project
+		43 |   }
+		44 | }
+
+Check: CKV_AWS_79: "Ensure Instance Metadata Service Version 1 is not enabled"
+	FAILED for resource: module.ec2.aws_instance.this
+	File: /../../modules/ec2/main.tf:29-44
+	Calling File: /main.tf:63-82
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/bc-aws-general-31
+
+		29 | resource "aws_instance" "this" {
+		30 |   for_each = var.instances
+		31 | 
+		32 |   ami                    = data.aws_ami.selected.id
+		33 |   instance_type          = each.value.instance_type
+		34 |   subnet_id              = var.subnet_id
+		35 |   key_name               = var.key_name
+		36 |   associate_public_ip_address = true
+		37 |   vpc_security_group_ids = [each.value.sg_id]
+		38 | 
+		39 |   tags = {
+		40 |     Name        = "${var.environment}-${each.key}"
+		41 |     Environment = var.environment
+		42 |     Project     = var.project
+		43 |   }
+		44 | }
+
+Check: CKV2_AWS_11: "Ensure VPC flow logging is enabled in all VPCs"
+	FAILED for resource: module.vpc.aws_vpc.this
+	File: /../../modules/vpc/main.tf:2-16
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-logging-policies/logging-9-enable-vpc-flow-logging
+
+		2  | resource "aws_vpc" "this" {
+		3  |   cidr_block           = var.vpc_cidr
+		4  |   enable_dns_hostnames = var.enable_dns_hostnames
+		5  |   enable_dns_support   = var.enable_dns_support
+		6  |   instance_tenancy     = var.instance_tenancy
+		7  | 
+		8  |   tags = merge(
+		9  |     {
+		10 |       Name        = "${var.environment}-${var.vpc_name}"
+		11 |       Environment = var.environment
+		12 |       Project     = var.project
+		13 |     },
+		14 |     var.tags
+		15 |   )
+		16 | }
+
+Check: CKV_AWS_18: "Ensure the S3 bucket has access logging enabled"
+	FAILED for resource: module.s3.aws_s3_bucket.this
+	File: /../../modules/s3/main.tf:1-9
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/s3-policies/s3-13-enable-logging
+
+		1 | resource "aws_s3_bucket" "this" {
+		2 |   bucket = "${var.environment}-${var.project}-s3"
+		3 | 
+		4 |   tags = {
+		5 |     Name        = "${var.environment}-${var.project}-s3"
+		6 |     Environment = var.environment
+		7 |     Project     = var.project
+		8 |   }
+		9 | }
+
+Check: CKV2_AWS_41: "Ensure an IAM role is attached to EC2 instance"
+	FAILED for resource: module.ec2.aws_instance.this
+	File: /../../modules/ec2/main.tf:29-44
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-iam-policies/ensure-an-iam-role-is-attached-to-ec2-instance
+
+		29 | resource "aws_instance" "this" {
+		30 |   for_each = var.instances
+		31 | 
+		32 |   ami                    = data.aws_ami.selected.id
+		33 |   instance_type          = each.value.instance_type
+		34 |   subnet_id              = var.subnet_id
+		35 |   key_name               = var.key_name
+		36 |   associate_public_ip_address = true
+		37 |   vpc_security_group_ids = [each.value.sg_id]
+		38 | 
+		39 |   tags = {
+		40 |     Name        = "${var.environment}-${each.key}"
+		41 |     Environment = var.environment
+		42 |     Project     = var.project
+		43 |   }
+		44 | }
+
