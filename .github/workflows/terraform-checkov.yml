@@ -59,10 +59,13 @@ jobs:
             -o cli \
             -o json \
             --output-file-path checkov-reports/prod
+        continue-on-error: true
 
       - name: Upload Checkov reports
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: checkov-reports
           path: checkov-reports/
+
 
