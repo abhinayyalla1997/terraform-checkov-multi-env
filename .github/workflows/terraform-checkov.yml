@@ -50,8 +50,8 @@ jobs:
             --config-file env/Dev/.checkov.yaml \
             -o cli -o json \
             --output-file-path checkov-reports/dev || true
-      
-      - name: Run Checkov (Prod - hard fail)
+
+      - name: Run Checkov (Prod)
         run: |
           checkov -d env/Prod \
             --config-file env/Prod/.checkov.yaml \
