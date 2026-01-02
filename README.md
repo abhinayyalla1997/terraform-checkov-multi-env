@@ -3,8 +3,6 @@
 This project demonstrates how to integrate **Checkov** into a real-world
 Terraform multi-environment setup using **GitHub Actions CI/CD**.
 
----
-
 ## 🚀 What This Project Demonstrates
 
 - Multi-environment Terraform structure (**Dev & Prod**)
@@ -15,8 +13,6 @@ Terraform multi-environment setup using **GitHub Actions CI/CD**.
   - **Prod** → enforcement (hard fail)
 - CI/CD integration using **GitHub Actions**
 - Generation of **Checkov reports** as pipeline artifacts
-
----
 
 ## 🔍 Security Scanning
 
@@ -43,27 +39,44 @@ No AWS credentials or Terraform apply are required.
 
 ```text
 .
-├── .github/
-│   └── workflows/
-│       └── terraform-checkov.yml
-├── docs/
+├── checkov-reports
+│   ├── dev
+│   │   ├── results_cli.txt
+│   │   └── results_json.json
+│   └── prod
+│       ├── results_cli.txt
+│       └── results_json.json
+├── docs
 │   └── CHECKOV_notes.pdf
-├── env/
-│   ├── Dev/
+├── env
+│   ├── Dev
 │   │   ├── .checkov.yaml
 │   │   ├── main.tf
-│   │   ├── variables.tf
-│   │   └── terraform.tfvars
-│   └── Prod/
-│       ├── .checkov.yaml
+│   │   ├── terraform.tfvars
+│   │   └── variables.tf
+│   └── Prod
+│   │   ├── .checkov.yaml
 │       ├── main.tf
-│       ├── variables.tf
-│       └── terraform.tfvars
-├── modules/
-│   ├── vpc/
-│   ├── ec2/
-│   ├── s3/
-│   ├── kms/
-│   └── nat-igw/
-├── .gitignore
+│       ├── terraform.tfvars
+│       └── variables.tf
+├── modules
+│   ├── ec2
+│   │   ├── main.tf
+│   │   ├── output.tf
+│   │   └── variables.tf
+│   ├── kms
+│   │   ├── main.tf
+│   │   ├── output.tf
+│   │   └── variables.tf
+│   ├── nat-igw
+│   │   ├── main.tf
+│   │   ├── output.tf
+│   │   └── variables.tf
+│   ├── s3
+│   │   ├── main.tf
+│   │   └── variables.tf
+│   └── vpc
+│       ├── main.tf
+│       ├── output.tf
+│       └── variables.tf
 └── README.md
