@@ -48,15 +48,17 @@ jobs:
         run: |
           checkov -d env/Dev \
             --config-file env/Dev/.checkov.yaml \
-            -o cli -o json \
-            --output-file-path checkov-reports/dev || true
+            -o cli \
+            -o json \
+            --output-file-path checkov-reports/dev/results.json || true
 
       - name: Run Checkov (Prod)
         run: |
           checkov -d env/Prod \
             --config-file env/Prod/.checkov.yaml \
-            -o cli -o json \
-            --output-file-path checkov-reports/prod
+            -o cli \
+            -o json \
+            --output-file-path checkov-reports/prod/results.json
 
       - name: Upload Checkov reports
         uses: actions/upload-artifact@v4
