@@ -3,13 +3,20 @@
 This project demonstrates how to integrate **Checkov** into a real-world
 Terraform multi-environment setup using **GitHub Actions CI/CD**.
 
-## 📌 What this project shows
+---
 
+## 🚀 What This Project Demonstrates
+
+- Multi-environment Terraform structure (**Dev & Prod**)
 - Reusable Terraform modules (VPC, EC2, S3, KMS, NAT)
-- Multiple environments (Dev & Prod)
-- Static security scanning using Checkov
-- CKV (resource-level) and CKV2 (architecture-level) checks
-- CI/CD enforcement without deploying infrastructure
+- Static security analysis using **Checkov**
+- Environment-based security enforcement:
+  - **Dev** → visibility (soft fail)
+  - **Prod** → enforcement (hard fail)
+- CI/CD integration using **GitHub Actions**
+- Generation of **Checkov reports** as pipeline artifacts
+
+---
 
 ## 🔍 Security Scanning
 
@@ -32,9 +39,31 @@ The GitHub Actions pipeline:
 
 No AWS credentials or Terraform apply are required.
 
-## 📂 Structure
+## 🏗 Repository Structure
 
 ```text
-env/        → Environment-specific configs
-modules/    → Reusable Terraform modules
-.github/    → CI/CD workflows
+.
+├── .github/
+│   └── workflows/
+│       └── terraform-checkov.yml
+├── docs/
+│   └── CHECKOV_notes.pdf
+├── env/
+│   ├── Dev/
+│   │   ├── .checkov.yaml
+│   │   ├── main.tf
+│   │   ├── variables.tf
+│   │   └── terraform.tfvars
+│   └── Prod/
+│       ├── .checkov.yaml
+│       ├── main.tf
+│       ├── variables.tf
+│       └── terraform.tfvars
+├── modules/
+│   ├── vpc/
+│   ├── ec2/
+│   ├── s3/
+│   ├── kms/
+│   └── nat-igw/
+├── .gitignore
+└── README.md
