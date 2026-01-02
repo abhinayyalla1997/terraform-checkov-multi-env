@@ -36,24 +36,31 @@ jobs:
         working-directory: env/Prod
         run: terraform validate
 
-      - name: Run Checkov (Dev)
+      - name: Install Checkov
+        run: pip install checkov
+      
+      - name: Create report directories
         run: |
-          pip install checkov
+          mkdir -p checkov-reports/dev
+          mkdir -p checkov-reports/prod
+      
+      - name: Run Checkov (Dev - soft fail)
+        run: |
           checkov -d env/Dev \
             --config-file env/Dev/.checkov.yaml \
             -o cli -o json \
             --output-file-path checkov-reports/dev || true
       
-      - name: Run Checkov (Prod)
+      - name: Run Checkov (Prod - hard fail)
         run: |
           checkov -d env/Prod \
             --config-file env/Prod/.checkov.yaml \
             -o cli -o json \
             --output-file-path checkov-reports/prod
-            
+
       - name: Upload Checkov reports
-        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: checkov-reports
           path: checkov-reports/
+
