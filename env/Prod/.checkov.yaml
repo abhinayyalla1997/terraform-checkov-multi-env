@@ -1,5 +1,4 @@
-framework:
-  - terraform
+framework: terraform
 
 check:
   - CKV_AWS_88     # EC2 public IP
@@ -17,5 +16,3 @@ skip-check:
 
 soft_fail: false
 
-output:
-  - cli
